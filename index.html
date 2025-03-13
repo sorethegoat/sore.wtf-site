@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter Sore</title>
+    <script src="addSnow.js"></script>
     <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('font.ttf') format('truetype');
+        }
+
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
             background-color: black;
+            cursor: url('cursor.cur'), auto;
+            font-family: 'CustomFont', sans-serif;
         }
 
         /* Background Video */
@@ -40,6 +48,7 @@
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 0 8px white;
+            font-family: 'CustomFont', sans-serif;
         }
 
         .enter-button:hover {
