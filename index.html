@@ -1,77 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter Sore</title>
-    <script src="addSnow.js"></script>
-    <style>
-        @font-face {
-            font-family: 'CustomFont';
-            src: url('font.ttf') format('truetype');
-        }
+<!DOCTYPE html><html lang="en"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@hook</title>
+        <style>
+            @import url("css/index.css");
+        </style>
+    </head>
+    <body>
+        <audio id="audio" style="display: none;"></audio>
 
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: black;
-            cursor: url('cursor.cur'), auto;
-            font-family: 'CustomFont', sans-serif;
-        }
+        <div class="overlay" id="overlay">
+            <div class="click-text">click</div>
+        </div>
 
-        /* Background Video */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            filter: blur(8px);
-        }
+        <div class="names-container">
+            <div class="name" onclick="window.location.href='sore/'">sore</div>
+            <div class="name" onclick="window.location.href='north/'">north</div>
+        </div>
+        
+        <script>
+            document.querySelector('body').addEventListener('click', () => {
+                document.getElementById('overlay').classList.add('hide-overlay');
+                
+                const playlist = [
+                    "1.mp3",
+                ];
 
-        /* Enter Button */
-        .enter-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px 40px;
-            font-size: 24px;
-            color: white;
-            background: transparent;
-            border: 2px solid white;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 0 8px white;
-            font-family: 'CustomFont', sans-serif;
-        }
+                let shuffledPlaylist = [];
+                const audioEle = document.getElementById("audio");
 
-        .enter-button:hover {
-            background: white;
-            color: black;
-        }
-    </style>
-</head>
-<body>
+                function shuffle(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
 
-    <!-- Background Video -->
-    <video autoplay loop muted class="video-background">
-        <source src="background.mp4" type="video/mp4">
-    </video>
+                function playaudio() {
+                    if (shuffledPlaylist.length === 0) {
+                        shuffledPlaylist = shuffle([...shuffledPlaylist.originalPlaylist]);
+                    }
 
-    <!-- Enter Button -->
-    <button class="enter-button" onclick="enterSite()">ENTER</button>
+                    const nextAudioPath = "./global/audios/main/" + shuffledPlaylist.shift();
+                    audioEle.src = nextAudioPath;
+                    audioEle.play();
+                }
 
-    <script>
-        function enterSite() {
-            window.location.href = "profile.html";
-        }
-    </script>
+                audioEle.addEventListener("ended", playaudio);
 
-</body>
-</html>
+                if (!Array.isArray(playlist) || playlist.length === 0) {
+                    throw new Error("empty");
+                }
+
+                shuffledPlaylist = shuffle([...playlist]);
+                shuffledPlaylist.originalPlaylist = playlist;
+
+                if (!audioEle.src) {
+                    playaudio();
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener('contextmenu', function(event) {
+                event.preventDefault();
+            });
+
+            let patternIndex = 0;
+
+            const patterns = [
+                '@hooked.bio'
+            ];
+
+            function typeWriter() {
+                document.querySelector('title').textContent = patterns[patternIndex];
+                patternIndex++;
+
+                if (patternIndex === patterns.length) {
+                    patternIndex = 0;  
+                }
+
+                setTimeout(typeWriter, 500); 
+            }
+
+            typeWriter(); 
+        </script>
+
+        <script src="js/addSnow.js"></script>
+        <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"></script>
+    
+</body></html>
