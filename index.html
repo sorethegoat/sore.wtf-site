@@ -1,94 +1,40 @@
-<!DOCTYPE html><html lang="en"><head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@hook</title>
-        <style>
-            @import url("css/index.css");
-        </style>
-    </head>
-    <body>
-        <audio id="audio" style="display: none;"></audio>
-
-        <div class="overlay" id="overlay">
-            <div class="click-text">click</div>
-        </div>
-
-        <div class="names-container">
-            <div class="name" onclick="window.location.href='nocs/'">nocs</div>
-            <div class="name" onclick="window.location.href='rebort/'">rebort</div>
-        </div>
-        
-        <script>
-            document.querySelector('body').addEventListener('click', () => {
-                document.getElementById('overlay').classList.add('hide-overlay');
-                
-                const playlist = [
-					"1.mp3",
-                ];
-
-                let shuffledPlaylist = [];
-                const audioEle = document.getElementById("audio");
-
-                function shuffle(array) {
-                    for (let i = array.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [array[i], array[j]] = [array[j], array[i]];
-                    }
-                    return array;
-                }
-
-                function playaudio() {
-                    if (shuffledPlaylist.length === 0) {
-                        shuffledPlaylist = shuffle([...shuffledPlaylist.originalPlaylist]);
-                    }
-
-                    const nextAudioPath = "./global/audios/main/" + shuffledPlaylist.shift();
-                    audioEle.src = nextAudioPath;
-                    audioEle.play();
-                }
-
-                audioEle.addEventListener("ended", playaudio);
-
-                if (!Array.isArray(playlist) || playlist.length === 0) {
-                    throw new Error("empty");
-                }
-
-                shuffledPlaylist = shuffle([...playlist]);
-                shuffledPlaylist.originalPlaylist = playlist;
-
-                if (!audioEle.src) {
-                    playaudio();
-                }
-            });
-        </script>
-
-        <script>
-            document.addEventListener('contextmenu', function(event) {
-                event.preventDefault();
-            });
-
-            let patternIndex = 0;
-
-            const patterns = [
-                '@hooked.bio'
-            ];
-
-            function typeWriter() {
-                document.querySelector('title').textContent = patterns[patternIndex];
-                patternIndex++;
-
-                if (patternIndex === patterns.length) {
-                    patternIndex = 0;  
-                }
-
-                setTimeout(typeWriter, 500); 
-            }
-
-            typeWriter(); 
-        </script>
-
-        <script src="js/addSnow.js"></script>
-        <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sore</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="names-container">
+        <div class="name" onclick="window.location.href='profile.html'">sore</div>
+        <div class="name" onclick="window.location.href='north/'">north</div>
+    </div>
     
-
-</body></html>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function createSnowflake() {
+                const snowflake = document.createElement("div");
+                snowflake.innerHTML = "*";
+                snowflake.classList.add("snowflake");
+                document.body.appendChild(snowflake);
+                
+                let left = Math.random() * window.innerWidth;
+                let duration = Math.random() * 5 + 5;
+                let size = Math.random() * 10 + 10;
+                
+                snowflake.style.left = left + "px";
+                snowflake.style.fontSize = size + "px";
+                snowflake.style.animationDuration = duration + "s";
+                
+                setTimeout(() => {
+                    snowflake.remove();
+                }, duration * 1000);
+            }
+            
+            setInterval(createSnowflake, 100);
+        });
+    </script>
+</body>
+</html>
