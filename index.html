@@ -1,93 +1,83 @@
-<!DOCTYPE html><html lang="en"><head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@hook</title>
-        <style>
-            @import url("css/index.css");
-        </style>
-    </head>
-    <body>
-        <audio id="audio" style="display: none;"></audio>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@hook</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <audio id="audio" style="display: none;"></audio>
 
-        <div class="overlay" id="overlay">
-            <div class="click-text">click</div>
-        </div>
+    <div class="overlay" id="overlay">
+        <div class="click-text">click</div>
+    </div>
 
-        <div class="names-container">
-            <div class="name" onclick="window.location.href='sore/'">sore</div>
-            <div class="name" onclick="window.location.href='north/'">north</div>
-        </div>
-        
-        <script>
-            document.querySelector('body').addEventListener('click', () => {
-                document.getElementById('overlay').classList.add('hide-overlay');
-                
-                const playlist = [
-                    "1.mp3",
-                ];
+    <div class="names-container">
+        <div class="name" onclick="window.location.href='profile.html'">sore</div>
+        <div class="name" onclick="window.location.href='north/'">north</div>
+    </div>
 
-                let shuffledPlaylist = [];
-                const audioEle = document.getElementById("audio");
+    <script>
+        document.querySelector('body').addEventListener('click', () => {
+            document.getElementById('overlay').classList.add('hide-overlay');
+            
+            const playlist = ["1.mp3"];
+            let shuffledPlaylist = [];
+            const audioEle = document.getElementById("audio");
 
-                function shuffle(array) {
-                    for (let i = array.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [array[i], array[j]] = [array[j], array[i]];
-                    }
-                    return array;
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
                 }
-
-                function playaudio() {
-                    if (shuffledPlaylist.length === 0) {
-                        shuffledPlaylist = shuffle([...shuffledPlaylist.originalPlaylist]);
-                    }
-
-                    const nextAudioPath = "./global/audios/main/" + shuffledPlaylist.shift();
-                    audioEle.src = nextAudioPath;
-                    audioEle.play();
-                }
-
-                audioEle.addEventListener("ended", playaudio);
-
-                if (!Array.isArray(playlist) || playlist.length === 0) {
-                    throw new Error("empty");
-                }
-
-                shuffledPlaylist = shuffle([...playlist]);
-                shuffledPlaylist.originalPlaylist = playlist;
-
-                if (!audioEle.src) {
-                    playaudio();
-                }
-            });
-        </script>
-
-        <script>
-            document.addEventListener('contextmenu', function(event) {
-                event.preventDefault();
-            });
-
-            let patternIndex = 0;
-
-            const patterns = [
-                '@hooked.bio'
-            ];
-
-            function typeWriter() {
-                document.querySelector('title').textContent = patterns[patternIndex];
-                patternIndex++;
-
-                if (patternIndex === patterns.length) {
-                    patternIndex = 0;  
-                }
-
-                setTimeout(typeWriter, 500); 
+                return array;
             }
 
-            typeWriter(); 
-        </script>
+            function playaudio() {
+                if (shuffledPlaylist.length === 0) {
+                    shuffledPlaylist = shuffle([...shuffledPlaylist.originalPlaylist]);
+                }
 
-        <script src="js/addSnow.js"></script>
-        <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"></script>
-    
-</body></html>
+                const nextAudioPath = "./global/audios/main/" + shuffledPlaylist.shift();
+                audioEle.src = nextAudioPath;
+                audioEle.play();
+            }
+
+            audioEle.addEventListener("ended", playaudio);
+
+            if (!Array.isArray(playlist) || playlist.length === 0) {
+                throw new Error("empty");
+            }
+
+            shuffledPlaylist = shuffle([...playlist]);
+            shuffledPlaylist.originalPlaylist = playlist;
+
+            if (!audioEle.src) {
+                playaudio();
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+
+        let patternIndex = 0;
+        const patterns = ['@hooked.bio'];
+
+        function typeWriter() {
+            document.querySelector('title').textContent = patterns[patternIndex];
+            patternIndex = (patternIndex + 1) % patterns.length;
+            setTimeout(typeWriter, 500);
+        }
+
+        typeWriter();
+    </script>
+
+    <script src="js/addSnow.js"></script>
+    <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"></script>
+
+</body>
+</html>
