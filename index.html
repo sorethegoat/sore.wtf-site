@@ -50,24 +50,27 @@ const LandingPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="absolute w-full h-full flex justify-center items-center bg-cover bg-center"
-          style={{ backgroundImage: "url('/your-background-image.png')" }}
+          style={{ backgroundImage: "url('/214fc97d695e0a5a0e9966e3771c5205.gif')" }}
         >
           <button
             onClick={() => setEntered(true)}
             className="text-white text-xl px-6 py-2 border border-white rounded-lg hover:bg-white hover:text-black transition-all drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
           >
-            Click to enter...
+            ENTER
           </button>
         </motion.div>
       ) : (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex flex-col items-center bg-black w-screen h-screen justify-center"
+          className="flex flex-col items-center bg-black w-screen h-screen justify-center relative"
         >
+          <audio autoPlay loop>
+            <source src="/SpotiDownloader.com - Sophie - Andreas Rönnberg.mp3" type="audio/mpeg" />
+          </audio>
           <div className="relative p-6 bg-black bg-opacity-50 backdrop-blur-lg rounded-lg shadow-lg text-center w-96">
             <img
-              src="/your-profile-image.jpg"
+              src="/7c281afb1ed8c0fc0ea97b2ba61ffe11.jpg"
               className="w-24 h-24 rounded-full border-4 border-white shadow-lg mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,1)]"
               alt="Profile"
             />
