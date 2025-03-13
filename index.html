@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sore</title>
+    <title>Enter Sore</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
             overflow: hidden;
+            background-color: black;
         }
-        
+
         /* Background Video */
         .video-background {
             position: fixed;
@@ -27,35 +24,27 @@
             filter: blur(8px);
         }
 
-        .profile-container {
+        /* Enter Button */
+        .enter-button {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .profile-container img {
-            width: 300px;
-            border-radius: 10px;
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 15px;
-            height: 15px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
+            padding: 20px 40px;
+            font-size: 24px;
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.3s;
             box-shadow: 0 0 8px white;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease-out;
-            z-index: 1000;
+        }
+
+        .enter-button:hover {
+            background: white;
+            color: black;
         }
     </style>
 </head>
@@ -66,30 +55,13 @@
         <source src="background.mp4" type="video/mp4">
     </video>
 
-    <!-- Profile Box -->
-    <div class="profile-container">
-        <img src="7c281afb1ed8c0fc0ea97b2ba61ffe11.jpg" alt="Profile Picture">
-        <h1>Sore</h1>
-        <p>We will begin our rituals when life ends</p>
-        <p>👁️ 28</p>
-    </div>
+    <!-- Enter Button -->
+    <button class="enter-button" onclick="enterSite()">ENTER</button>
 
-    <!-- Music -->
-    <audio autoplay loop>
-        <source src="music.mp3" type="audio/mp3">
-    </audio>
-
-    <!-- Cursor Script -->
     <script>
-        document.body.style.cursor = "none";
-        const cursor = document.createElement("div");
-        cursor.classList.add("cursor");
-        document.body.appendChild(cursor);
-        
-        document.addEventListener("mousemove", (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
-        });
+        function enterSite() {
+            window.location.href = "profile.html";
+        }
     </script>
 
 </body>
