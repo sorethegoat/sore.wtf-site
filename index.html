@@ -15,6 +15,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             overflow: hidden;
+            cursor: none;
         }
         /* Background Video */
         #background-video {
@@ -37,21 +38,9 @@
             align-items: center;
             background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
-        }
-        #enter-button {
-            padding: 15px 30px;
             font-size: 24px;
-            border: 2px solid white;
-            background: transparent;
             color: white;
             cursor: pointer;
-            text-shadow: 0 0 10px white;
-            transition: 0.3s;
-        }
-        #enter-button:hover {
-            background: white;
-            color: black;
-            text-shadow: none;
         }
         /* Main Content */
         #main-content {
@@ -103,21 +92,25 @@
             text-shadow: none;
         }
         /* Custom Cursor */
-        body {
-            cursor: url('cursor.png'), auto;
+        #cursor {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: transparent;
+            border: 2px solid white;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
         }
-        /* Cursor Glow Effect */
         .cursor-trail {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: cyan;
-            border-radius: 50%;
-            box-shadow: 0 0 10px cyan;
+            width: 20px;
+            height: 2px;
+            background: white;
+            box-shadow: 0 0 10px white;
             pointer-events: none;
-            animation: fadeOut 0.5s ease-out;
+            animation: trailFade 0.3s linear;
         }
-        @keyframes fadeOut {
+        @keyframes trailFade {
             from { opacity: 1; transform: scale(1); }
             to { opacity: 0; transform: scale(2); }
         }
@@ -129,8 +122,8 @@
     </video>
     
     <!-- Entry Screen -->
-    <div id="entry-screen">
-        <button id="enter-button">ENTER</button>
+    <div id="entry-screen" onclick="enterSite()">
+        click to enter...
     </div>
     
     <!-- Main Content -->
@@ -151,23 +144,29 @@
         <source src="SpotiDownloader.com - Sophie - Andreas Rönnberg.mp3" type="audio/mpeg">
     </audio>
     
+    <div id="cursor"></div>
+    
     <script>
-        document.getElementById('enter-button').addEventListener('click', function() {
+        function enterSite() {
             document.getElementById('entry-screen').style.display = 'none';
             document.getElementById('main-content').style.display = 'flex';
             
             let audio = document.getElementById('background-music');
-            audio.currentTime = 6; // Start at 6 seconds
+            audio.currentTime = 6;
             audio.play();
-        });
+        }
         
         document.addEventListener('mousemove', function(event) {
+            let cursor = document.getElementById('cursor');
+            cursor.style.left = `${event.clientX}px`;
+            cursor.style.top = `${event.clientY}px`;
+            
             let trail = document.createElement('div');
             trail.classList.add('cursor-trail');
             trail.style.left = `${event.clientX}px`;
             trail.style.top = `${event.clientY}px`;
             document.body.appendChild(trail);
-            setTimeout(() => trail.remove(), 500);
+            setTimeout(() => trail.remove(), 300);
         });
     </script>
 </body>
