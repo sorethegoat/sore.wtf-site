@@ -1,173 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SORE.WTF</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Global Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            background: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            overflow: hidden;
-            cursor: none;
-        }
-        /* Background Video */
-        #background-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            filter: blur(5px);
-            z-index: -1;
-        }
-        /* Entry Screen */
-        #entry-screen {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
-        }
-        /* Main Content */
-        #main-content {
-            display: none;
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .profile {
-            margin-bottom: 20px;
-        }
-        .pfp {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 15px white;
-        }
-        .username {
-            font-size: 2rem;
-            text-shadow: 0 0 10px white;
-        }
-        .bio {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-        .views {
-            font-size: 1rem;
-        }
-        .links {
-            margin-top: 20px;
-        }
-        .link {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            border: 2px solid cyan;
-            color: cyan;
-            text-decoration: none;
-            text-shadow: 0 0 10px cyan;
-            transition: 0.3s;
-        }
-        .link:hover {
-            background: cyan;
-            color: black;
-            text-shadow: none;
-        }
-        /* Custom Cursor */
-        #cursor {
-            position: fixed;
-            width: 15px;
-            height: 15px;
-            background: transparent;
-            border: 2px solid white;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-        .cursor-trail {
-            position: absolute;
-            width: 20px;
-            height: 2px;
-            background: white;
-            box-shadow: 0 0 10px white;
-            pointer-events: none;
-            animation: trailFade 0.3s linear;
-        }
-        @keyframes trailFade {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0; transform: scale(2); }
-        }
-    </style>
-</head>
-<body>
-    <video id="background-video" autoplay loop muted>
-        <source src="214fc97d695e0a5a0e9966e3771c5205.gif" type="video/mp4">
-    </video>
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { FaSpotify, FaDiscord } from "react-icons/fa";
+import "tailwindcss/tailwind.css";
+
+const LandingPage = () => {
+  const [entered, setEntered] = useState(false);
+
+  useEffect(() => {
+    document.body.style.cursor = "none";
     
-    <!-- Entry Screen -->
-    <div id="entry-screen" onclick="enterSite()">
-        click to enter...
+    const cursor = document.createElement("div");
+    cursor.style.position = "fixed";
+    cursor.style.width = "20px";
+    cursor.style.height = "20px";
+    cursor.style.background = "transparent";
+    cursor.style.border = "none";
+    cursor.style.display = "flex";
+    cursor.style.alignItems = "center";
+    cursor.style.justifyContent = "center";
+    cursor.style.pointerEvents = "none";
+    cursor.style.zIndex = "1000";
+    cursor.innerHTML = "<div style='position:absolute;width:15px;height:2px;background:white;box-shadow:0 0 10px white;'></div><div style='position:absolute;width:2px;height:15px;background:white;box-shadow:0 0 10px white;'></div>";
+    document.body.appendChild(cursor);
+
+    const trail = document.createElement("div");
+    trail.style.position = "fixed";
+    trail.style.width = "80px";
+    trail.style.height = "3px";
+    trail.style.background = "white";
+    trail.style.filter = "blur(10px)";
+    trail.style.opacity = "0.6";
+    trail.style.pointerEvents = "none";
+    document.body.appendChild(trail);
+
+    const moveCursor = (e) => {
+      cursor.style.top = `${e.clientY - 10}px`;
+      cursor.style.left = `${e.clientX - 10}px`;
+      trail.style.top = `${e.clientY}px`;
+      trail.style.left = `${e.clientX}px`;
+    };
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
+  }, []);
+
+  return (
+    <div className="w-screen h-screen flex justify-center items-center bg-black">
+      {!entered ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute w-full h-full flex justify-center items-center bg-cover bg-center"
+          style={{ backgroundImage: "url('/your-background-image.png')" }}
+        >
+          <button
+            onClick={() => setEntered(true)}
+            className="text-white text-xl px-6 py-2 border border-white rounded-lg hover:bg-white hover:text-black transition-all drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+          >
+            Click to enter...
+          </button>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex flex-col items-center bg-black w-screen h-screen justify-center"
+        >
+          <div className="relative p-6 bg-black bg-opacity-50 backdrop-blur-lg rounded-lg shadow-lg text-center w-96">
+            <img
+              src="/your-profile-image.jpg"
+              className="w-24 h-24 rounded-full border-4 border-white shadow-lg mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,1)]"
+              alt="Profile"
+            />
+            <h1 className="text-white text-2xl font-bold mt-4 drop-shadow-[0_0_10px_rgba(255,255,255,1)]">Sore</h1>
+            <p className="text-gray-300 mt-2">We will begin our rituals when life ends</p>
+            <div className="flex justify-center gap-4 mt-4">
+              <a href="https://spotify.com" className="text-white text-3xl hover:text-green-400"><FaSpotify /></a>
+              <a href="https://discord.com" className="text-white text-3xl hover:text-blue-400"><FaDiscord /></a>
+            </div>
+            <p className="text-gray-400 text-sm mt-4">👁️ 28</p>
+          </div>
+        </motion.div>
+      )}
     </div>
-    
-    <!-- Main Content -->
-    <div id="main-content" class="hidden">
-        <div class="profile">
-            <img src="7c281afb1ed8c0fc0ea97b2ba61ffe11.jpg" alt="Profile Picture" class="pfp">
-            <h1 class="username">Sore</h1>
-            <p class="bio">Welcome to my world.</p>
-            <p class="views">Views: <span id="view-count">0</span></p>
-        </div>
-        <div class="links">
-            <a href="#" class="link">Spotify</a>
-            <a href="#" class="link">Roblox</a>
-        </div>
-    </div>
-    
-    <audio id="background-music" loop>
-        <source src="SpotiDownloader.com - Sophie - Andreas Rönnberg.mp3" type="audio/mpeg">
-    </audio>
-    
-    <div id="cursor"></div>
-    
-    <script>
-        function enterSite() {
-            document.getElementById('entry-screen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'flex';
-            
-            let audio = document.getElementById('background-music');
-            audio.currentTime = 6;
-            audio.play();
-        }
-        
-        document.addEventListener('mousemove', function(event) {
-            let cursor = document.getElementById('cursor');
-            cursor.style.left = `${event.clientX}px`;
-            cursor.style.top = `${event.clientY}px`;
-            
-            let trail = document.createElement('div');
-            trail.classList.add('cursor-trail');
-            trail.style.left = `${event.clientX}px`;
-            trail.style.top = `${event.clientY}px`;
-            document.body.appendChild(trail);
-            setTimeout(() => trail.remove(), 300);
-        });
-    </script>
-</body>
-</html>
+  );
+};
+
+export default LandingPage;
