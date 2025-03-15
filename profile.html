@@ -56,20 +56,6 @@
             transform: scale(1.1);
         }
 
-        /* Cursor Trail */
-        .cursor-trail {
-            position: absolute;
-            width: 12px;
-            height: 2px;
-            background: white;
-            box-shadow: 0 0 10px white;
-            border-radius: 2px;
-            pointer-events: none;
-            transform: rotate(0deg);
-            opacity: 1;
-            transition: opacity 0.15s ease-out;
-        }
-
         /* Typewriter Effect */
         .typewriter-container {
             display: flex;
@@ -92,6 +78,18 @@
 
         @keyframes blink {
             50% { border-color: transparent }
+        }
+
+        /* Smooth Cursor Trail */
+        .trail {
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: white;
+            opacity: 0.7;
+            pointer-events: none;
+            transform-origin: center;
+            transition: opacity 0.3s ease-out;
         }
     </style>
 </head>
@@ -122,11 +120,12 @@
         <source src="music.mp3" type="audio/mp3">
     </audio>
 
-    <!-- JavaScript for Typewriter Effect -->
+    <!-- JavaScript for Typewriter Effect & Cursor Trail -->
     <script>
+        // Typewriter Effect
         const text = "/frequency for op sets";
         let index = 0;
-        const speed = 100; // Typing speed (milliseconds)
+        const speed = 100;
 
         function typeWriter() {
             if (index < text.length) {
@@ -142,28 +141,28 @@
             typeWriter();
         };
 
-        // Cursor Trail Effect
-        let lastX = 0, lastY = 0;
+        // Smooth Cursor Trail Effect
+        let trails = [];
 
         document.addEventListener("mousemove", function(event) {
+            let trail = document.createElement("div");
+            trail.classList.add("trail");
+
             let x = event.clientX;
             let y = event.clientY;
 
-            let trail = document.createElement("div");
-            trail.classList.add("cursor-trail");
-
-            let angle = Math.atan2(y - lastY, x - lastX) * 180 / Math.PI;
             trail.style.left = `${x}px`;
             trail.style.top = `${y}px`;
-            trail.style.transform = `rotate(${angle}deg)`;
-
             document.body.appendChild(trail);
-            lastX = x;
-            lastY = y;
+
+            trails.push(trail);
 
             setTimeout(() => {
                 trail.style.opacity = "0";
-                setTimeout(() => trail.remove(), 150);
+                setTimeout(() => {
+                    trail.remove();
+                    trails.shift();
+                }, 300);
             }, 100);
         });
     </script>
