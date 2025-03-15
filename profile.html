@@ -59,14 +59,15 @@
         /* Cursor Trail */
         .cursor-trail {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 12px;
+            height: 2px;
             background: white;
-            border-radius: 50%;
             box-shadow: 0 0 10px white;
+            border-radius: 2px;
             pointer-events: none;
-            opacity: 0.8;
-            transition: transform 0.1s linear, opacity 0.1s ease-in-out;
+            transform: rotate(0deg);
+            opacity: 1;
+            transition: opacity 0.15s ease-out;
         }
     </style>
 </head>
@@ -95,24 +96,30 @@
         <source src="music.mp3" type="audio/mp3">
     </audio>
 
-    <!-- JavaScript for Cursor Trail -->
+    <!-- JavaScript for Smooth Cursor Trail -->
     <script>
-        document.addEventListener("mousemove", function(event) {
-            let trail = document.createElement("div");
-            trail.classList.add("cursor-trail");
-            document.body.appendChild(trail);
+        let lastX = 0, lastY = 0;
 
+        document.addEventListener("mousemove", function(event) {
             let x = event.clientX;
             let y = event.clientY;
-            
+
+            let trail = document.createElement("div");
+            trail.classList.add("cursor-trail");
+
+            let angle = Math.atan2(y - lastY, x - lastX) * 180 / Math.PI;
             trail.style.left = `${x}px`;
             trail.style.top = `${y}px`;
+            trail.style.transform = `rotate(${angle}deg)`;
 
-            // Remove the trail smoothly
+            document.body.appendChild(trail);
+            lastX = x;
+            lastY = y;
+
             setTimeout(() => {
                 trail.style.opacity = "0";
-                setTimeout(() => trail.remove(), 100);
-            }, 80);
+                setTimeout(() => trail.remove(), 150);
+            }, 100);
         });
     </script>
 
