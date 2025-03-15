@@ -33,7 +33,7 @@
         }
 
         .profile-container img {
-            width: 200px; /* Reduced size */
+            width: 200px;
             border-radius: 10px;
         }
 
@@ -69,6 +69,25 @@
             opacity: 1;
             transition: opacity 0.15s ease-out;
         }
+
+        /* Typewriter Effect */
+        .typewriter {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid white;
+            font-size: 16px;
+            animation: typing 2s steps(20, end) forwards, blink 0.8s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent }
+        }
     </style>
 </head>
 <body>
@@ -78,7 +97,7 @@
         <img src="pfp.gif" alt="Profile Picture">
         <h1>sore</h1>
         <p>test</p>
-        <p>/frequency for op sets</p>
+        <p id="typewriter-text"></p> <!-- Empty text to be typed -->
 
         <!-- Social Icons -->
         <div class="social-links">
@@ -96,8 +115,27 @@
         <source src="music.mp3" type="audio/mp3">
     </audio>
 
-    <!-- JavaScript for Smooth Cursor Trail -->
+    <!-- JavaScript for Typewriter Effect -->
     <script>
+        const text = "/frequency for op sets";
+        let index = 0;
+        const speed = 100; // Typing speed (milliseconds)
+
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typewriter-text").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, speed);
+            } else {
+                document.getElementById("typewriter-text").classList.add("typewriter");
+            }
+        }
+
+        window.onload = () => {
+            typeWriter();
+        };
+
+        // Cursor Trail Effect
         let lastX = 0, lastY = 0;
 
         document.addEventListener("mousemove", function(event) {
