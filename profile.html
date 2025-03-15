@@ -71,6 +71,11 @@
         }
 
         /* Typewriter Effect */
+        .typewriter-container {
+            display: flex;
+            justify-content: center;
+        }
+
         .typewriter {
             display: inline-block;
             white-space: nowrap;
@@ -97,7 +102,9 @@
         <img src="pfp.gif" alt="Profile Picture">
         <h1>sore</h1>
         <p>test</p>
-        <p id="typewriter-text"></p> <!-- Empty text to be typed -->
+        <div class="typewriter-container">
+            <p id="typewriter-text"></p>
+        </div>
 
         <!-- Social Icons -->
         <div class="social-links">
