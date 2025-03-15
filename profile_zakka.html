@@ -1,1 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sore</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('zakkabackground.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            cursor: url('cursor.cur'), auto;
+        }
 
+        /* Profile Box */
+        .profile-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            width: 350px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-container img {
+            width: 200px;
+            border-radius: 10px;
+        }
+
+        /* Social Icons */
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            display: inline-block;
+        }
+
+        .social-links img {
+            width: 40px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Typewriter Effect */
+        .typewriter-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .typewriter {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid white;
+            font-size: 16px;
+            animation: typing 2s steps(20, end) forwards, blink 0.8s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent }
+        }
+
+        /* Smooth Cursor Trail */
+        .trail {
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: white;
+            opacity: 0.7;
+            pointer-events: none;
+            transform-origin: center;
+            transition: opacity 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Profile Box -->
+    <div class="profile-container">
+        <img src="zakkapfp.png" alt="Profile Picture">
+        <h1>sore</h1>
+        <p>test</p>
+        <div class="typewriter-container">
+            <p id="typewriter-text"></p>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="social-links">
+            <a href="https://open.spotify.com/user/" target="_blank">
+                <img src="spotify.png" alt="Spotify">
+            </a>
+            <a href="https://discord.gg/estacy" target="_blank">
+                <img src="discord.jpg" alt="Discord">
+            </a>
+        </div>
+    </div>
+
+    <!-- Music -->
+    <audio autoplay loop>
+        <source src="musicz" type="audio/mp3">
+    </audio>
+
+    <!-- JavaScript for Typewriter Effect & Cursor Trail -->
+    <script>
+        // Typewriter Effect
+        const text = "Best Dahood Player /estacy";
+        let index = 0;
+        const speed = 100;
+
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typewriter-text").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, speed);
+            } else {
+                document.getElementById("typewriter-text").classList.add("typewriter");
+            }
+        }
+
+        window.onload = () => {
+            typeWriter();
+        };
+
+        // Smooth Cursor Trail Effect
+        let trails = [];
+
+        document.addEventListener("mousemove", function(event) {
+            let trail = document.createElement("div");
+            trail.classList.add("trail");
+
+            let x = event.clientX;
+            let y = event.clientY;
+
+            trail.style.left = `${x}px`;
+            trail.style.top = `${y}px`;
+            document.body.appendChild(trail);
+
+            trails.push(trail);
+
+            setTimeout(() => {
+                trail.style.opacity = "0";
+                setTimeout(() => {
+                    trail.remove();
+                    trails.shift();
+                }, 300);
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>
