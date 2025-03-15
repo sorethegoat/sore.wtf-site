@@ -17,21 +17,56 @@
             cursor: url('cursor.cur'), auto;
         }
 
+        /* Profile Box */
         .profile-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.2);
             padding: 20px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
+            width: 350px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .profile-container img {
-            width: 300px;
+            width: 200px; /* Reduced size */
             border-radius: 10px;
+        }
+
+        /* Social Icons */
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            display: inline-block;
+        }
+
+        .social-links img {
+            width: 40px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Cursor Trail */
+        .cursor-trail {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            pointer-events: none;
+            opacity: 0.8;
+            transition: transform 0.1s linear, opacity 0.1s ease-in-out;
         }
     </style>
 </head>
@@ -43,11 +78,43 @@
         <h1>sore</h1>
         <p>test</p>
         <p>/frequency for op sets</p>
+
+        <!-- Social Icons -->
+        <div class="social-links">
+            <a href="https://open.spotify.com/user/your_spotify" target="_blank">
+                <img src="spotify.png" alt="Spotify">
+            </a>
+            <a href="https://discord.gg/your_discord" target="_blank">
+                <img src="discord.png" alt="Discord">
+            </a>
+        </div>
     </div>
 
     <!-- Music -->
     <audio autoplay loop>
         <source src="music.mp3" type="audio/mp3">
     </audio>
+
+    <!-- JavaScript for Cursor Trail -->
+    <script>
+        document.addEventListener("mousemove", function(event) {
+            let trail = document.createElement("div");
+            trail.classList.add("cursor-trail");
+            document.body.appendChild(trail);
+
+            let x = event.clientX;
+            let y = event.clientY;
+            
+            trail.style.left = `${x}px`;
+            trail.style.top = `${y}px`;
+
+            // Remove the trail smoothly
+            setTimeout(() => {
+                trail.style.opacity = "0";
+                setTimeout(() => trail.remove(), 100);
+            }, 80);
+        });
+    </script>
+
 </body>
 </html>
