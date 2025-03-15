@@ -15,21 +15,20 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
             cursor: url('cursor.cur'), auto;
             font-family: 'CustomFont', sans-serif;
         }
 
-        /* Background Video */
-        .video-background {
+        /* Overlay Blur Effect */
+        .background-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            filter: blur(8px);
+            backdrop-filter: blur(8px);
         }
 
         /* Enter Button */
@@ -58,11 +57,8 @@
     </style>
 </head>
 <body>
-
-    <!-- Background Video -->
-    <video autoplay loop muted class="video-background">
-        <source src="background.mp4" type="video/mp4">
-    </video>
+    <!-- Overlay for Blur Effect -->
+    <div class="background-overlay"></div>
 
     <!-- Enter Button -->
     <button class="enter-button" onclick="enterSite()">ENTER</button>
@@ -72,6 +68,5 @@
             window.location.href = "profile.html";
         }
     </script>
-
 </body>
 </html>
