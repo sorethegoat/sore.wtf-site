@@ -19,6 +19,11 @@
             background-size: cover;
             cursor: url('cursor.cur'), auto;
             font-family: 'CustomFont', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
         }
 
         /* Overlay Blur Effect */
@@ -31,28 +36,36 @@
             backdrop-filter: blur(8px);
         }
 
-        /* Enter Button */
-        .enter-button {
+        /* Text Container */
+        .text-container {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px 40px;
-            font-size: 24px;
+            z-index: 2;
+        }
+
+        /* Sore & Zakka Buttons */
+        .text-container div {
+            font-size: 50px;
             color: white;
-            background: transparent;
-            border: 2px solid white;
             text-transform: uppercase;
             letter-spacing: 3px;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 0 8px white;
+            text-shadow: 0 0 8px white;
             font-family: 'CustomFont', sans-serif;
         }
 
-        .enter-button:hover {
-            background: white;
+        .text-container div:hover {
             color: black;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 12px white;
+        }
+
+        /* Spacing */
+        .zakka {
+            margin-top: 10px;
+            font-size: 30px;
         }
     </style>
 </head>
@@ -60,12 +73,15 @@
     <!-- Overlay for Blur Effect -->
     <div class="background-overlay"></div>
 
-    <!-- Enter Button -->
-    <button class="enter-button" onclick="enterSite()">ENTER</button>
+    <!-- Text Buttons -->
+    <div class="text-container">
+        <div onclick="enterSite('profile.html')">sore</div>
+        <div class="zakka" onclick="enterSite('profile_zakka.html')">zakka</div>
+    </div>
 
     <script>
-        function enterSite() {
-            window.location.href = "profile.html";
+        function enterSite(page) {
+            window.location.href = page;
         }
     </script>
 </body>
