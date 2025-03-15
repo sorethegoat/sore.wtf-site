@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter Sore</title>
+    
+    <!-- Preload Important Assets -->
+    <link rel="preload" href="background.png" as="image">
+    <link rel="preload" href="font.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="cursor.cur" as="image">
+    <link rel="preload" href="musicbb.mp3" as="audio">
+    
     <script src="addSnow.js"></script>
     <style>
         @font-face {
@@ -17,13 +24,14 @@
             overflow: hidden;
             background: url('background.png') no-repeat center center fixed;
             background-size: cover;
-            cursor: url('cursor.cur'), auto;
+            cursor: url('cursor.cur'), default;
             font-family: 'CustomFont', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             text-align: center;
+            transition: opacity 0.5s ease-in;
         }
 
         /* Overlay Blur Effect */
@@ -67,6 +75,22 @@
             margin-top: 10px;
             font-size: 30px;
         }
+
+        /* Fade Out Transition */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .text-container div {
+                font-size: 30px;
+            }
+            .zakka {
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -79,9 +103,18 @@
         <div class="zakka" onclick="enterSite('profile_zakka.html')">zakka</div>
     </div>
 
+    <!-- Background Music -->
+    <audio id="bg-music" loop autoplay>
+        <source src="musicbb.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
         function enterSite(page) {
-            window.location.href = page;
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = page;
+            }, 500);
         }
     </script>
 </body>
