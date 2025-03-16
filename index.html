@@ -135,10 +135,10 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             const textContainer = document.querySelector(".text-container");
-            
+
             textContainer.style.opacity = "0";
             textContainer.style.transform = "translateY(30px)";
-
+            
             setTimeout(() => {
                 textContainer.style.animation = "fadeInUp 0.8s ease-out forwards";
             }, 50);
@@ -146,10 +146,14 @@
 
         window.addEventListener("pageshow", function () {
             const textContainer = document.querySelector(".text-container");
-            textContainer.style.opacity = "0";
-            textContainer.style.transform = "translateY(30px)";
+            
+            textContainer.style.animation = "none";
+            void textContainer.offsetWidth;
+            textContainer.style.animation = "fadeInUp 0.8s ease-out forwards";
+
             setTimeout(() => {
-                textContainer.style.animation = "fadeInUp 0.8s ease-out forwards";
+                textContainer.style.opacity = "1";
+                textContainer.style.transform = "translateY(0)";
             }, 50);
         });
     </script>
