@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter Sore</title>
     
-    <!-- Preload Important Assets -->
     <link rel="preload" href="background.png" as="image">
     <link rel="preload" href="font.ttf" as="font" type="font/ttf" crossorigin="anonymous">
     <link rel="preload" href="cursor.cur" as="image">
@@ -34,7 +33,6 @@
             transition: opacity 0.5s ease-in;
         }
 
-        /* Overlay Blur Effect */
         .background-overlay {
             position: fixed;
             top: 0;
@@ -44,13 +42,15 @@
             backdrop-filter: blur(4px);
         }
 
-        /* Text Container */
         .text-container {
             position: absolute;
             z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.5s;
         }
 
-        /* Sore & Zakka Buttons */
         .text-container div {
             font-size: 50px;
             color: white;
@@ -60,6 +60,17 @@
             transition: 0.3s;
             text-shadow: 0 0 8px white;
             font-family: 'CustomFont', sans-serif;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .text-container div:nth-child(1) {
+            animation-delay: 0.7s;
+        }
+
+        .text-container div:nth-child(2) {
+            animation-delay: 1s;
         }
 
         .text-container div:hover {
@@ -70,19 +81,27 @@
             box-shadow: 0 0 12px white;
         }
 
-        /* Spacing */
         .zakka {
             margin-top: 10px;
             font-size: 30px;
         }
 
-        /* Fade Out Transition */
         .fade-out {
             opacity: 0;
             transition: opacity 0.5s ease-out;
         }
 
-        /* Mobile Responsiveness */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 600px) {
             .text-container div {
                 font-size: 30px;
@@ -94,16 +113,13 @@
     </style>
 </head>
 <body>
-    <!-- Overlay for Blur Effect -->
     <div class="background-overlay"></div>
 
-    <!-- Text Buttons -->
     <div class="text-container">
         <div onclick="enterSite('profile.html')">sore</div>
         <div class="zakka" onclick="enterSite('profile_zakka.html')">zakka</div>
     </div>
 
-    <!-- Background Music -->
     <audio id="bg-music" loop autoplay>
         <source src="musicbb.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
