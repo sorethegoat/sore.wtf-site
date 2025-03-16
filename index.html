@@ -40,15 +40,51 @@
             width: 100%;
             height: 100%;
             backdrop-filter: blur(4px);
+            z-index: 1;
+        }
+
+        .initial-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(4px);
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .initial-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .initial-text {
+            font-size: 50px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            text-shadow: 0 0 8px white;
+            font-family: 'CustomFont', sans-serif;
         }
 
         .text-container {
             position: absolute;
-            z-index: 2;
+            z-index: 3;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.5s;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
         }
 
         .text-container div {
@@ -103,6 +139,9 @@
         }
 
         @media (max-width: 600px) {
+            .initial-text {
+                font-size: 30px;
+            }
             .text-container div {
                 font-size: 30px;
             }
@@ -114,6 +153,9 @@
 </head>
 <body>
     <div class="background-overlay"></div>
+    <div class="initial-overlay">
+        <div class="initial-text">Click to choose a user</div>
+    </div>
 
     <div class="text-container">
         <div onclick="enterSite('profile.html')">sore</div>
@@ -134,14 +176,19 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
+            const initialOverlay = document.querySelector(".initial-overlay");
             const textContainer = document.querySelector(".text-container");
+
+            initialOverlay.addEventListener("click", function () {
+                initialOverlay.classList.add("hidden");
+                textContainer.style.display = "flex";
+                setTimeout(() => {
+                    textContainer.style.animation = "fadeInUp 0.8s ease-out forwards";
+                }, 50);
+            });
 
             textContainer.style.opacity = "0";
             textContainer.style.transform = "translateY(30px)";
-            
-            setTimeout(() => {
-                textContainer.style.animation = "fadeInUp 0.8s ease-out forwards";
-            }, 50);
         });
 
         window.addEventListener("pageshow", function () {
