@@ -11,6 +11,10 @@
             src: url('metafont.ttf') format('truetype');
         }
 
+        * {
+            cursor: url('cursor.cur'), auto !important;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -161,8 +165,18 @@
 
         .volume-control input[type="range"] {
             width: 80px;
-            cursor: pointer;
+            cursor: url('cursor.cur'), auto !important;
         }
+
+        a, button, input, select, textarea, label, .click-text {
+            cursor: url('cursor.cur'), auto !important;
+        }
+
+        .volume-control input[type="range"] {
+            width: 80px;
+            cursor: url('cursor.cur'), auto !important;
+        }
+
     </style>
 </head>
 <body>
