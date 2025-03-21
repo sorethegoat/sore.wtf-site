@@ -170,6 +170,7 @@
         Your browser does not support the audio element.
     </audio>
 
+    <script src="addsnow.js"></script>
     <script>
         function enterSite(page) {
             document.body.classList.add('fade-out');
@@ -184,7 +185,6 @@
             const bgMusic = document.getElementById("bg-music");
 
             initialOverlay.addEventListener("click", function () {
-                console.log("Initial overlay clicked");
                 initialOverlay.classList.add("hidden");
                 textContainer.style.display = "flex";
                 setTimeout(() => {
@@ -195,22 +195,6 @@
                     console.error("Audio playback failed:", error);
                 });
             });
-
-            textContainer.style.opacity = "0";
-            textContainer.style.transform = "translateY(30px)";
-        });
-
-        window.addEventListener("pageshow", function () {
-            const textContainer = document.querySelector(".text-container");
-            
-            textContainer.style.animation = "none";
-            void textContainer.offsetWidth;
-            textContainer.style.animation = "fadeInUp 0.8s ease-out forwards";
-
-            setTimeout(() => {
-                textContainer.style.opacity = "1";
-                textContainer.style.transform = "translateY(0)";
-            }, 50);
         });
     </script>
 </body>
