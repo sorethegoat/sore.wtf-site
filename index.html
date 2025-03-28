@@ -170,10 +170,17 @@
         <div class="rya" onclick="enterSite('profile_rya.html')">rya</div>
     </div>
 
-    <audio id="bg-music">
-        <source src="lobby.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+<audio id="bg-music">
+    <source src="lobby.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const bgMusic = document.getElementById("bg-music");
+        bgMusic.volume = 0.3; 
+    });
+</script>
 
     <script src="addsnow.js"></script>
     <script>
