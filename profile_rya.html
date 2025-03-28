@@ -11,10 +11,6 @@
             src: url('metafont.ttf') format('truetype');
         }
 
-        * {
-            cursor: url('cursor.cur'), auto !important;
-        }
-
         body {
             margin: 0;
             padding: 0;
@@ -24,7 +20,6 @@
             font-family: Arial, sans-serif;
             text-align: center;
             overflow: hidden;
-            cursor: url('cursor.cur'), auto;
         }
 
         .overlay {
@@ -124,26 +119,6 @@
             font-size: 16px;
         }
 
-        .profile-views {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 12px;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .profile-views i {
-            color: #ffffff;
-        }
-
         .volume-control {
             position: absolute;
             top: 10px;
@@ -165,18 +140,7 @@
 
         .volume-control input[type="range"] {
             width: 80px;
-            cursor: url('cursor.cur'), auto !important;
         }
-
-        a, button, input, select, textarea, label, .click-text {
-            cursor: url('cursor.cur'), auto !important;
-        }
-
-        .volume-control input[type="range"] {
-            width: 80px;
-            cursor: url('cursor.cur'), auto !important;
-        }
-
     </style>
 </head>
 <body>
@@ -211,14 +175,12 @@
                     </a>
                 </div>
             </div>
-
     <audio id="audio" loop>
         <source src="musicr.mp3" type="audio/mp3">
     </audio>
 
     <script src="typeEffect.js"></script>
     <script src="cursorEffect.js"></script>
-    <script src="profileViewsZakka.js"></script>
     <script src="volumeSlider.js"></script>
     <script src="clickFunction.js"></script>
 </body>
