@@ -110,6 +110,10 @@
         .text-container div:nth-child(2) {
             animation-delay: 1s;
         }
+        
+        .text-container div:nth-child(3) {
+            animation-delay: 1.3s;
+        }
 
         .text-container div:hover {
             color: black;
@@ -119,7 +123,7 @@
             box-shadow: 0 0 12px white;
         }
 
-        .zakka {
+        .zakka, .rya {
             margin-top: 10px;
             font-size: 30px;
         }
@@ -147,7 +151,7 @@
             .text-container div {
                 font-size: 30px;
             }
-            .zakka {
+            .zakka, .rya {
                 font-size: 20px;
             }
         }
@@ -163,6 +167,7 @@
     <div class="text-container">
         <div onclick="enterSite('profile.html')">sore</div>
         <div class="zakka" onclick="enterSite('profile_zakka.html')">zakka</div>
+        <div class="rya" onclick="enterSite('profile_rya.html')">rya</div>
     </div>
 
     <audio id="bg-music">
