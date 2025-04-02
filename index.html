@@ -144,6 +144,19 @@
             }
         }
 
+        .dont-open {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            color: red;
+            font-weight: bold;
+            text-shadow: 0 0 10px white;
+            z-index: 10000;
+            text-transform: uppercase;
+        }
+
         @media (max-width: 600px) {
             .initial-text {
                 font-size: 30px;
@@ -153,6 +166,10 @@
             }
             .zakka, .rya {
                 font-size: 20px;
+            }
+
+            .dont-open {
+                font-size: 80px;
             }
         }
     </style>
@@ -168,10 +185,13 @@
         <div onclick="enterSite('profile.html')">dont open trust bro</div>
     </div>
 
-<audio id="bg-music">
-    <source src="lobby.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+    <!-- Large Red Text "DONT OPEN" -->
+    <div class="dont-open">DONT OPEN</div>
+
+    <audio id="bg-music">
+        <source src="lobby.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
